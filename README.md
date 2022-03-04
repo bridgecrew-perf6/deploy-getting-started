@@ -16,7 +16,8 @@ Installed on your local PC:
 ## Instructions
 1. Download this repo somewhere to your pc
 2. From that folder run `vagrant up`
-3. Open your Browser and enter http://127.0.0.1:9000/
+3. Watch the output and look for the ansible message at the end: 
+`"msg": "Access the app: http://192.168.0.119:9000"`
 4. Enter some items to the todo list
 5. Re-provision the vm using `vagrant up --provision`
 6. validate that your previous entered items are still there
