@@ -31,3 +31,5 @@ After the ansible installation is done, the playbook is getting executed.
 
 ## Ansible
 A port for the app can be configured in `ansible/hostvars/localhost.yml`
+
+Ansible installs the docker daemon, copies the Dockerfile and the docker-compose file. It builds and run the app container, with the mysql server.
