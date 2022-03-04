@@ -2,9 +2,6 @@
 Ansible playbook to deploy this app on a compute instance using docker: 
 https://github.com/docker/getting-started
 
-
-A static volume is used for the sqlite database
-
 # Installation
 This is a standalone running shipped version
 
