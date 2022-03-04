@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  app:
+    image: todo
+    command: sh -c "yarn install && yarn run dev"
+    ports:
+      - "${COMPOSE_PORT}:3000"
+    working_dir: /app
+    volumes:
+      - app:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+    networks:
+      - public
+      - database
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+    networks:
+      - database
+
+volumes:
+  todo-mysql-data:
+  app:
+
+networks:
+  public:
+  database:

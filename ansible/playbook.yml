@@ -1,0 +1,55 @@
+---
+- name: Deploy the getting started app on this vm
+  hosts: localhost
+  roles:
+    - geerlingguy.docker
+
+  tasks:
+
+    - name: Installing packages
+      apt:
+        pkg:
+        - git
+        - python3-pip
+      become: yes
+
+    - name: installing docker-compose
+      pip:
+        name:
+          - docker-compose
+
+    - name: Clone the getting-started app
+      git:
+        repo: https://github.com/docker/getting-started
+        dest: /app/
+        clone: yes
+        update: yes
+
+    - name: Copy docker-compose.yml file
+      copy: 
+        src: /ansible/docker-compose.yml
+        dest: /app/app
+
+    - name: Copy Dockerfile
+      copy: 
+        src: /ansible/Dockerfile
+        dest: /app/app
+
+    - name: Build the image
+      docker_image:
+        name: todo
+        build:
+          path: /app/app
+        source: build
+      
+    - name: Build and run the docker image using docker-compose
+      community.docker.docker_compose:
+        project_src: /app/app
+        build: yes
+        state: present
+      environment:
+        COMPOSE_PORT: "{{ app_port }}"
+
+    - name: printing url
+      debug:
+        msg: "Access the app: http://{{ ansible_facts.enp0s8.ipv4.address }}:{{ app_port }}"

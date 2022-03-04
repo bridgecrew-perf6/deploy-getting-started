@@ -1,0 +1,9 @@
+---
+roles: 
+# Install a collection from Ansible Galaxy.
+  - name: geerlingguy.docker
+    source: https://galaxy.ansible.com
+collections:
+  - community.docker
+
+    
