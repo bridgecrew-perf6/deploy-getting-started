@@ -29,6 +29,9 @@ Vagrant validates the `Vagrantfile` and configures the network (bridged is used)
 
 After the ansible installation is done, the playbook is getting executed.
 
+Ansible will be executed by vagrant on the vm, not from the host. This is to maintain compability with Windows hosts. 
+the folder `ansible` is mounted on the vagrant vm at `/ansible` and will be used by ansible.
+
 ## Ansible
 A port for the app can be configured in `ansible/hostvars/localhost.yml`
 
